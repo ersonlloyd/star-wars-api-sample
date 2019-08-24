@@ -1,0 +1,108 @@
+.ant-table-thead {
+    > tr {
+      background: #0B1618;
+    }
+  
+    > tr > th {
+      color: #fff;
+      border-bottom: 3px solid lighten(black, 5%);
+      font-size: 1.1rem
+    }
+  
+    .ant-table-column-title {
+      white-space: nowrap;
+    }
+  }
+  
+  .ant-table-thead {
+    > tr > th.ant-table-column-sort {
+      background: black;
+     }
+  }
+  
+  .ant-table-thead {
+    > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+      background: #0B1618;
+    }
+  }
+  
+  .ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner 
+  .ant-table-column-sorter-up.on, .ant-table-thead > tr > th .ant-table-column-sorter 
+  .ant-table-column-sorter-inner .ant-table-column-sorter-down.on {
+    color: yellow;
+  }
+  
+  .ant-table-tbody {
+    > tr > td {
+      background: #0B1618;
+      color: #fff;
+      border-color: lighten(black, 5%);
+    }
+  
+    > tr > td:not(:first-child) {
+      white-space: nowrap;
+    }
+  }
+  
+  .ant-table-tbody > tr:hover:not(.ant-table-expanded-row) > td {
+    background: rgba(255,255,255,.075)
+  }
+  
+  .ant-table-pagination.ant-pagination {
+    margin-top: 8px * 4;
+    margin-bottom: 0;
+  }
+  
+  .ant-pagination-disabled.ant-pagination-prev > .ant-pagination-item-link,
+  .ant-pagination-disabled.ant-pagination-next > .ant-pagination-item-link,
+  .ant-pagination-disabled.ant-pagination-prev > .ant-pagination-item-link:hover,
+  .ant-pagination-disabled.ant-pagination-next > .ant-pagination-item-link:hover {
+    background: black;
+    border-color: darken(#7f8088, 15%);
+    color: darken(#7f8088, 15%);
+  }
+  
+  .ant-pagination-prev > .ant-pagination-item-link,
+  .ant-pagination-next > .ant-pagination-item-link {
+    background: black;
+    border-color: lighten(#7f8088, 10%);
+    color: lighten(#7f8088, 10%);
+  }
+  
+  .ant-pagination-prev > .ant-pagination-item-link:hover,
+  .ant-pagination-next > .ant-pagination-item-link:hover {
+    border-color: yellow;
+    color: yellow;
+  }
+  
+  .ant-pagination-item {
+    & {
+      background: black;
+      border-color: lighten(#7f8088, 10%);
+    }
+  
+    &:hover {
+      border-color: yellow;
+  
+      > a {
+        color: yellow;
+      }
+    }
+  
+    > a {
+      color: lighten(#7f8088, 10%)
+    }
+  }
+  
+  .ant-pagination-item-active {
+    &,
+    &:hover {
+      background: black;
+      border-color: yellow !important;
+    }
+  
+    > a,
+    > a:hover {
+      color: yellow !important;
+    }
+  }

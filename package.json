@@ -3,9 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
+    "antd": "^3.22.0",
+    "apollo-boost": "^0.4.4",
+    "apollo-link": "^1.2.12",
+    "apollo-link-rest": "^0.7.3",
+    "graphql": "^14.5.0",
+    "graphql-anywhere": "^4.2.4",
+    "immutable": "^4.0.0-rc.12",
+    "lodash.flowright": "^3.5.0",
+    "node-sass": "^4.12.0",
+    "qs": "^6.8.0",
     "react": "^16.9.0",
+    "react-apollo": "^3.0.1",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "sass": "^1.22.10",
+    "ys": "^0.3.5"
   },
   "scripts": {
     "start": "react-scripts start",
