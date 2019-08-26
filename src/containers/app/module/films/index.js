@@ -1,88 +1,71 @@
-import React from 'react'
-import { withApollo, Query } from 'react-apollo'
-import { Table, Card, Spin } from 'antd'
-import flowright from "lodash.flowright"
-import FILMS from '../../../../../src/graphql/films'
+import React, { useState, useEffect } from "react"
 
-import '../films/index.scss'
+import { fetchFilms } from "../../../../../src/api/filmApi"
+import Notification from "../../../../utils/notification"
 
-const FilmContainer = (props) => {
-  
-  const columns = [
-    {
-      title: 'Film',
-      dataIndex: 'films',
-      key: 'films'
-    },
-    {
-      title: 'Producer',
-      dataIndex: 'producer',
-      key: 'producer'
-    },
-    {
-      title: 'Director',
-      dataIndex: 'director',
-      key: 'director'
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date'
-    },
-    {
-      title: 'Edited',
-      dataIndex: 'update',
-      key: 'update'
-    },
-    {
-      title: 'URL',
-      dataIndex: 'site',
-      key: 'site'
+function FilmList() {
+  const [films, setFilms] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    fetchFilms()
+      .then(({ data }) => {
+        console.log(data.results);
+        setFilms(data.results);
+      })
+      .catch(error => console.error("Error", error));
+  }, []);
+
+  const handleFavorite = film => {
+    const favoritedFilms = JSON.parse(localStorage.getItem("favorites")) || {};
+    Notification.show({
+      type: 'success',
+      message: 'Success'
+    })
+
+    if (isFavorited(film)) {
+      delete favoritedFilms[film.title];
+      setFavorites(favorites.filter(favorite => favorite !== film.title));
+    } else {
+      favoritedFilms[film.title] = film;
+      setFavorites([...favorites, film.title]);
     }
 
-  ]
+    localStorage.setItem("favorites", JSON.stringify(favoritedFilms));
+  };
 
-  function getAllFilms (props) {
-    let rowItems = []
+  const isFavorited = ({ title }) =>
+    favorites.find(favorite => favorite === title);
 
-    return (
-      <Query query={FILMS.ALL_FILMS}>
-        { ({data, loading, error}) => {
-          if (loading) return <Spin />
-          if (error) return <p>ERROR</p>
-          const converted = [data]
-          converted[0].getAllFilms.results.map((value, i) =>
-            rowItems.push({
-              key: i,
-              films: value.title,
-              producer: value.producer,
-              director: value.director,
-              date: value.created,
-              update: value.edited,
-              site: value.url
-            })
-          )
-          return (
-            <Table dataSource={rowItems} columns={columns} pagination={false}  scroll={{ x: 'fit-content' }}/>
-          )
-        }}
-      </Query>
-    )
-  }
+  const favoriteFilms = films.filter(film => {
+    return favorites.includes(film.title);
+  });
 
+  const unfavoriteFilms = films.filter(film => {
+    return !favorites.includes(film.title);
+  });
+
+  const displayableFilms = [...favoriteFilms, ...unfavoriteFilms];
   return (
-    <div className='body-content'>
-      <h2>List of Films</h2>
-      <Card>
-        <div className='table-container'>
-          {getAllFilms(props)}
-        </div>
-      </Card>
+    <div className="content">
+      <h2>Star Wars Films: </h2>
+      <div className="films">
+        {displayableFilms.map(film => (
+          <div key={film.title}>
+            <ul>
+              <li>Title: {film.title}</li>
+              <li>Episode: {film.episode_id}</li>
+              <li>
+                <button onClick={() => handleFavorite(film)}>
+                  {isFavorited(film) ? "Unfavorite" : "Favorite"}
+                </button>
+              </li>
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-
-export default flowright(
-  withApollo
-)(FilmContainer)
+export default FilmList;
