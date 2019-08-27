@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import FilmList from './containers/app/module/films'
+import FilmDetails from './containers/app/module/films/filmDetails'
 
 const Routes = () => (
   <Router>
     <Switch>
-      {/* <Route path="/:id" component={} /> */}
+      <Route path="/:id" component={FilmDetails} />
       <Route path="/" component={FilmList} />
     </Switch>
   </Router>
