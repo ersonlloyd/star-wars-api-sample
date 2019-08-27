@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { fetchFilms } from "../../../../../src/api/filmApi"
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import slugify from 'slugify'
 
 function FilmList(props) {
   const [films, setFilms] = useState([]);
@@ -60,10 +61,8 @@ function FilmList(props) {
       .catch(error => console.error("Error", error));
   }
 
-
   const displayableFilms = [...favoriteFilms, ...unfavoriteFilms];
   const { history } = props
-  const linkTo = route => history.push(route)
 
   return (
     <div className="content">
@@ -76,7 +75,18 @@ function FilmList(props) {
         {displayableFilms.map(film => (
           <div key={film.title}>
             <ul>
-              <a href='#' onClick={() => linkTo(film)}>Title: {film.title}</a>
+             <li>
+                <Link
+                  to={{
+                    pathname: `/${slugify(film.title, { lower: true })}`,
+                    state: {
+                      url: film.url
+                    }
+                  }}
+                >
+                  Title: {film.title}
+                </Link>
+              </li>              
               <li>Episode: {film.episode_id}</li>
               <li>
                 <button onClick={() => handleFavorite(film)}>

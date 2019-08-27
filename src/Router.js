@@ -7,7 +7,7 @@ import FilmDetails from './containers/app/module/films/filmDetails'
 const Routes = () => (
   <Router>
     <Switch>
-      <Route path="/:id" component={FilmDetails} />
+      <Route path="/:slug" component={FilmDetails} />
       <Route path="/" component={FilmList} />
     </Switch>
   </Router>
