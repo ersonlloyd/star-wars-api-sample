@@ -62,8 +62,6 @@ function FilmList(props) {
   }
 
   const displayableFilms = [...favoriteFilms, ...unfavoriteFilms];
-  const { history } = props
-
   return (
     <div className="content">
       <h2>Star Wars Films: </h2>
@@ -80,7 +78,7 @@ function FilmList(props) {
                   to={{
                     pathname: `/${slugify(film.title, { lower: true })}`,
                     state: {
-                      url: film.url
+                      film: film
                     }
                   }}
                 >
