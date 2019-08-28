@@ -54,6 +54,7 @@ function FilmList(props) {
   }
 
   const search = e => {
+    e.preventDefault()
     axios.get(`https://swapi.co/api/films/?search=${searchValue}`)
       .then(({ data }) => {
         setFilms(data.results);
