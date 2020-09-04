@@ -20,7 +20,7 @@
     "graphql-anywhere": "^4.2.4",
     "immutable": "^4.0.0-rc.12",
     "lodash.flowright": "^3.5.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "qs": "^6.8.0",
     "react": "^16.9.0",
     "react-apollo": "^3.0.1",
